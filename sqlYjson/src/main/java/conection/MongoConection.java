@@ -6,7 +6,10 @@ package conection;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bson.Document;
+
 import com.mongodb.MongoClient;
+import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoIterable;
 
@@ -19,11 +22,11 @@ public class MongoConection {
 
 	private static MongoConection mongoConection;
 	private MongoClient mongoConexion;
-	private MongoDatabase mongoBD;
+	private static MongoDatabase mongoBD;
 
 	
 	private MongoConection() {
-		super();
+		connection();
 	}
 	
 	public static MongoConection _GetInstance() {
@@ -59,10 +62,15 @@ public class MongoConection {
 	       mongoBD = mongoConexion.getDatabase(bd);
 	       if(mongoBD!=null)
 	       {
-	           System.out.println("Conectado a la base de datos "+bd+" con exito");
 	           result= true;
 	       
 	       }
 	       return result;
 		}
+	public static void insert(String nombreColeccion, Document documento)
+    {
+        MongoCollection<org.bson.Document> coleccion = mongoBD.getCollection(nombreColeccion);
+        coleccion.insertOne(documento);
+    
+    }
 }

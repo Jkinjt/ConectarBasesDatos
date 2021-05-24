@@ -46,6 +46,21 @@ public class MysqDBInformation {
 		
 		return result;
 	}
+	public static void  useDB(String dataBase) {
+		Connection con = MysqlServer._getInstance();
+		if (con != null) {
+			Statement st;
+			try {
+				st = con.createStatement();
+				String q = SHOWTABLES;
+				st.executeQuery(q);
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 	public static List<String> getTables(){
 		List<String>  result=new ArrayList<String>();
 		Connection con = MysqlServer._getInstance();

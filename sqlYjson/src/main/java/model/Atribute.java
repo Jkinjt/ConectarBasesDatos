@@ -3,6 +3,8 @@
  */
 package model;
 
+import Utils.TypeSql;
+
 /**
  * @author Joaquin
  *Clase que recoge la información de cada atributo de la tabla en sql
@@ -55,11 +57,31 @@ public class Atribute {
 		this.valor = valor;
 	}
 
+	
+	public TypeSql getTypeInt() {
+		TypeSql result=TypeSql.empty;
+		if(type!=null) {
+			if(this.type.contains("int")) {
+				result=TypeSql.integer;	
+						
+			}else if(this.type.contains("varchar")) {
+				result=TypeSql.varchar;	
+			}else if(this.type.contains("date")) {
+				result=TypeSql.date;
+			}
+			
+		}
+		
+		return result;
+	}
+
 
 	@Override
 	public String toString() {
-		return "Table [atributte=" + name + ", type=" + type + "]";
+		return "Atribute [name=" + name + ", type=" + type + ", valor=" + valor + "]";
 	}
+
+	
 	
 	
 	
